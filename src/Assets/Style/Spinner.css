@@ -17,6 +17,7 @@
   }
 }
 
+/* for div with border radius = 50% */
 .loading-spinner {
   width: 75px;
   height: 75px;
@@ -30,6 +31,7 @@
   animation: spinner 1.5s linear infinite;
 }
 
+/* for gif file */
 .loading-spinner-gif{
   position: fixed;
   top: 50%;
