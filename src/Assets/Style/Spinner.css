@@ -1,0 +1,37 @@
+@keyframes spinner {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) ;
+    /* border-top: 7.5px solid #383636;
+    border-bottom: 7.5px solid #746e6e; */
+  }
+
+  /* 50%{
+    border-top: 7.5px solid #746e6e;
+    border-bottom: 7.5px solid #383636;
+  } */
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+    /* border-top: 7.5px solid #383636;
+    border-bottom: 7.5px solid #746e6e; */
+  }
+}
+
+.loading-spinner {
+  width: 75px;
+  height: 75px;
+  border: 7.5px solid #f3f3f3;
+  border-top: 7.5px solid #383636;
+  /* border-bottom: 7.5px solid #383636; */
+  border-radius: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.loading-spinner-gif{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

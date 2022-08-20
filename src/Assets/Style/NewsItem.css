@@ -1,0 +1,31 @@
+
+.card {
+    width: 18rem;
+    border: 1px solid black;
+    /* aspect-ratio: 1; */
+}
+
+.card-img-top {
+    width: 100%;
+    aspect-ratio: 2/1;
+}
+
+.card-body .truncate{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.card-body .title-truncate{
+    -webkit-line-clamp: 1;
+}
+
+.card-body .description-truncate{
+    -webkit-line-clamp: 2;
+}
+
+.card-text {
+    width: 100%;
+    aspect-ratio: 5;
+}
