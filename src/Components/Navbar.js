@@ -25,16 +25,17 @@ export class Navbar extends Component {
                                         Category
                                     </Link>
                                     <ul className="dropdown-menu" aria-labelledby="categoryDropdown" style={{height: 'calc( 5 * 100% )', overflow:'auto'}}>
+                                        {/* <li><Link className="dropdown-item" value="general" to="/">General</Link></li> */}
+                                        <li><Link className="dropdown-item" value="general" to="/">General</Link></li>
                                         <li><Link className="dropdown-item" value="business" to="/business">Business</Link></li>
                                         <li><Link className="dropdown-item" value="entertainment" to="/entertainment">Entertainment</Link></li>
-                                        <li><Link className="dropdown-item" value="general" to="/">General</Link></li>
-                                        <li><Link className="dropdown-item" value="health" to="/">Health</Link></li>
-                                        <li><Link className="dropdown-item" value="science" to="/">Science</Link></li>
-                                        <li><Link className="dropdown-item" value="sports" to="/">Sports</Link></li>
-                                        <li><Link className="dropdown-item" value="technology" to="/">Technology</Link></li>
+                                        <li><Link className="dropdown-item" value="health" to="/health">Health</Link></li>
+                                        <li><Link className="dropdown-item" value="science" to="/science">Science</Link></li>
+                                        <li><Link className="dropdown-item" value="sports" to="/sports">Sports</Link></li>
+                                        <li><Link className="dropdown-item" value="technology" to="/technology">Technology</Link></li>
                                     </ul>
                                 </li>
-                                <li className="nav-item dropdown">
+                                {/* <li className="nav-item dropdown">
                                     <Link className="nav-link dropdown-toggle" to="/" id="countryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Country
                                     </Link>
@@ -94,7 +95,7 @@ export class Navbar extends Component {
                                         <li><Link className="dropdown-item" value="ve" to="/">ve</Link></li>
                                         <li><Link className="dropdown-item" value="za" to="/">za</Link></li>
                                     </ul>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

@@ -18,7 +18,8 @@ function News(props) {
         ...prevState,
         isLoading: true
       }));
-      const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=bcaa0c7987b0437db17fa96548c83a76&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
+      const url = `https://newsapi.org/v2/top-headlines?apiKey=bcaa0c7987b0437db17fa96548c83a76&country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
+      // console.log("- - - url - - -", url)
       try {
         const response = await fetch(url);
         const data = await response.json();
