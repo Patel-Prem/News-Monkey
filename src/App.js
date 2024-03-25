@@ -14,7 +14,7 @@ export class App extends Component {
     return (
       <div>
         <Navbar/>
-        <News exact path="/" pageSize={15} country={'us'} category={'science'}/>
+        <News exact path="/" pageSize={12} country={'us'} category={'science'}/>
       </div>
     )
   }
