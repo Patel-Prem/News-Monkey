@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from './Components/Navbar'
 import News from './Components/News'
-import ReactPaginate from 'react-paginate';
 export class App extends Component {
 
   constructor() {
@@ -15,7 +14,7 @@ export class App extends Component {
     return (
       <div>
         <Navbar/>
-        <News pageSize={15} country={'us'} category={'science'}/>
+        <News exact path="/" pageSize={15} country={'us'} category={'science'}/>
       </div>
     )
   }
