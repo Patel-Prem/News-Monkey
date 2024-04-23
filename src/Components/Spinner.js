@@ -4,12 +4,11 @@ import loadder from '../Assets/GIF/loading.gif';
 
 export default function LoadingSpinner() {
   return (
-
     <div className="spinner-container">
       {/* <div className="loading-spinner">
       </div> */}
 
-      <img src={loadder} alt="loadder" className="loading-spinner-gif" />
+      <img src={loadder} alt="loader" className="loading-spinner-gif" />
 
     </div>
   );
