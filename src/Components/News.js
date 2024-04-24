@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import NewsItem from './NewsItem';
-import LoadingSpinner from './Spinner';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import NewsItem from "./NewsItem";
+import LoadingSpinner from "./Spinner";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function News(props) {
   const [newsData, setNewsData] = useState({
@@ -14,55 +15,71 @@ function News(props) {
 
   useEffect(() => {
     async function fetchData() {
-      setNewsData(prevState => ({
+      console.log("fetchData is CALLED ...");
+      setNewsData((prevState) => ({
         ...prevState,
-        isLoading: true
+        isLoading: true,
       }));
-      const url = `https://newsapi.org/v2/top-headlines?apiKey=bcaa0c7987b0437db17fa96548c83a76&country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
-      // console.log("- - - url - - -", url)
+      const url = `https://newsapi.org/v2/top-headlines?apiKey=ff9da25a5ed04b698ecce56685c5b50f&country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
+      console.log("- - - url - - -", url)
       try {
         const response = await fetch(url);
         const data = await response.json();
-        setNewsData(prevState => ({
+        setNewsData((prevState) => ({
           ...prevState,
-          articles: data.articles,
+          // articles: data.articles,
+          articles: newsData.articles.concat(data.articles),
           isLoading: false,
           totalResults: data.totalResults,
-          pages: Math.ceil(data.totalResults / props.pageSize)
+          pages: Math.ceil(data.totalResults / props.pageSize),
         }));
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setNewsData(prevState => ({
+        console.error("Error fetching data:", error);
+        setNewsData((prevState) => ({
           ...prevState,
-          isLoading: false
+          isLoading: false,
         }));
       }
     }
-    
+
     fetchData();
-  }, [newsData.pageCount]);
+    }, [newsData.pageCount]);
 
-  const previousBtn = () => {
-    setNewsData(prevState => ({
+  const fetchMoreData = async () => {
+    console.log("fetchMoreData is CALLED ...");
+    setNewsData((prevState) => ({
       ...prevState,
-      pageCount: prevState.pageCount - 1
+      pageCount: prevState.pageCount + 1,
     }));
   };
 
-  const nextBtn = () => {
-    setNewsData(prevState => ({
-      ...prevState,
-      pageCount: prevState.pageCount + 1
-    }));
-  };
+  // const previousBtn = () => {
+  //   setNewsData(prevState => ({
+  //     ...prevState,
+  //     pageCount: prevState.pageCount - 1
+  //   }));
+  // };
+
+  // const nextBtn = () => {
+  //   setNewsData(prevState => ({
+  //     ...prevState,
+  //     pageCount: prevState.pageCount + 1
+  //   }));
+  // };
 
   return (
     <div>
       {newsData.isLoading && <LoadingSpinner />}
-      {!newsData.isLoading && (
-        <div className="container-fluid my-3">
-          <h3>Welcome to NewsMokey's top headlines</h3>
-          <hr />
+      <div className="container-fluid my-3">
+        <h3>Welcome to NewsMokey's top headlines</h3>
+        <hr />
+
+        <InfiniteScroll
+          dataLength={newsData.articles.length} //This is important field to render the next data
+          next={fetchMoreData}
+          hasMore={newsData.articles.length !== newsData.totalResults}
+          loader={<LoadingSpinner />}
+        >
           <div className="d-flex flex-wrap justify-content-center align-items-center">
             {newsData.articles.map((element) => (
               <div key={element.url}>
@@ -75,7 +92,9 @@ function News(props) {
               </div>
             ))}
           </div>
-          <div className="container d-flex justify-content-between">
+        </InfiniteScroll>
+
+        {/* <div className="container d-flex justify-content-between">
             <button
               disabled={newsData.pageCount <= 1}
               type="button"
@@ -92,16 +111,15 @@ function News(props) {
             >
               Next &rarr;
             </button>
-          </div>
-        </div>
-      )}
+          </div> */}
+      </div>
     </div>
   );
 }
 
 News.defaultProps = {
-  country: 'in',
-  category: 'general',
+  country: "in",
+  category: "general",
   pageSize: 12,
 };
 
