@@ -15,13 +15,13 @@ function News(props) {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("fetchData is CALLED ...");
+      // console.log("fetchData is CALLED ...");
       setNewsData((prevState) => ({
         ...prevState,
         isLoading: true,
       }));
       const url = `https://newsapi.org/v2/top-headlines?apiKey=ff9da25a5ed04b698ecce56685c5b50f&country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
-      console.log("- - - url - - -", url)
+      // console.log("- - - url - - -", url)
       try {
         const response = await fetch(url);
         const data = await response.json();
@@ -46,7 +46,7 @@ function News(props) {
     }, [newsData.pageCount]);
 
   const fetchMoreData = async () => {
-    console.log("fetchMoreData is CALLED ...");
+    // console.log("fetchMoreData is CALLED ...");
     setNewsData((prevState) => ({
       ...prevState,
       pageCount: prevState.pageCount + 1,
@@ -78,7 +78,7 @@ function News(props) {
           dataLength={newsData.articles.length} //This is important field to render the next data
           next={fetchMoreData}
           hasMore={newsData.articles.length !== newsData.totalResults}
-          loader={<LoadingSpinner />}
+          // loader={<LoadingSpinner />}
         >
           <div className="d-flex flex-wrap justify-content-center align-items-center">
             {newsData.articles.map((element) => (
@@ -88,6 +88,9 @@ function News(props) {
                   description={element.description}
                   imageUrl={element.urlToImage}
                   newsUrl={element.url}
+                  sourceName={element.source.name}
+                  author={element.author}
+                  publishedAt={element.publishedAt}
                 />
               </div>
             ))}
