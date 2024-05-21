@@ -11,7 +11,7 @@ export class NewsItem extends Component {
             <div>
                 <div className="container my-3">
                     <div className="card m-auto">
-                    <span class="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-danger"> {sourceName} </span>
+                    <span className="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-danger"> {sourceName} </span>
                         <img src={imageUrl ? imageUrl : defaultImg} className="card-img-top" alt="news image"/>
                         <div className="card-body">
                             <h5 className="card-title truncate title-truncate">{title}</h5>

@@ -20,11 +20,17 @@ function News(props) {
         ...prevState,
         isLoading: true,
       }));
-      const url = `https://newsapi.org/v2/top-headlines?apiKey=ff9da25a5ed04b698ecce56685c5b50f&country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
-      // console.log("- - - url - - -", url)
+      const url = `https://newsapi.org/v2/top-headlines?apiKey=${props.apiKey}&country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${newsData.pageCount}`;
+      console.log("- - - url - - -", url)
       try {
+        if (newsData.pageCount === 1) {
+          props.setProgress(10);
+        }
         const response = await fetch(url);
         const data = await response.json();
+        if (newsData.pageCount === 1) {
+          props.setProgress(50);
+        }
         setNewsData((prevState) => ({
           ...prevState,
           // articles: data.articles,
@@ -33,6 +39,9 @@ function News(props) {
           totalResults: data.totalResults,
           pages: Math.ceil(data.totalResults / props.pageSize),
         }));
+        if (newsData.pageCount === 1) {
+          props.setProgress(100);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
         setNewsData((prevState) => ({
@@ -53,6 +62,12 @@ function News(props) {
     }));
   };
 
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
   // const previousBtn = () => {
   //   setNewsData(prevState => ({
   //     ...prevState,
@@ -71,9 +86,9 @@ function News(props) {
     <div>
       {newsData.isLoading && <LoadingSpinner />}
       <div className="container-fluid my-3">
-        <h3>Welcome to NewsMokey's top headlines</h3>
-        <hr />
 
+        <h3 className="text-center">{`Welcome to NewsMokey's ${capitalizeFirstLetter(props.category)} top headlines`}</h3>
+        <hr />
         <InfiniteScroll
           dataLength={newsData.articles.length} //This is important field to render the next data
           next={fetchMoreData}
@@ -96,7 +111,6 @@ function News(props) {
             ))}
           </div>
         </InfiniteScroll>
-
         {/* <div className="container d-flex justify-content-between">
             <button
               disabled={newsData.pageCount <= 1}
